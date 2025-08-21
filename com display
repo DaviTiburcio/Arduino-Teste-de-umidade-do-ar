@@ -1,0 +1,32 @@
+#include <dht.h>
+#include <LiquidCrystal.h>
+
+#define pinoDHT11 7
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+dht sensorDHT11;
+
+void setup () {
+  lcd.begin(16, 2);
+  lcd.print("Lendo sensor...");
+  delay(2000);
+}
+
+void loop () {
+  sensorDHT11.read11(pinoDHT11);
+
+  lcd.clear();
+
+  lcd.setCursor(0, 0);
+  lcd.print("Temp: ");
+  lcd.print(sensorDHT11.temperature);
+  lcd.print(" C");
+
+  lcd.setCursor(0, 1);
+  lcd.print("Umid: ");
+  lcd.print(sensorDHT11.humidity);
+  lcd.print(" %");
+
+  delay(2000);
+}
